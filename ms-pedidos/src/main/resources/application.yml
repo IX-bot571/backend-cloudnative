@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ms-pedidos
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+app:
+  rabbit:
+    exchange: tareas.exchange
+    notificacion-routing-key: notificacion.enviar
