@@ -1,0 +1,24 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: ms-notificaciones
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        acknowledge-mode: manual
+        default-requeue-rejected: false
+
+app:
+  rabbit:
+    exchange: tareas.exchange
+    queue: notificaciones.queue
+    routing-key: notificacion.enviar
+    dlx: tareas.dlx
+    dlq: notificaciones.dlq
+    dlq-routing-key: notificacion.fallida
