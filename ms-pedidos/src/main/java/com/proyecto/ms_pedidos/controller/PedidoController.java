@@ -1,15 +1,18 @@
 package com.proyecto.ms_pedidos.controller;
 
 import com.proyecto.ms_pedidos.dto.PedidoRequest;
+import com.proyecto.ms_pedidos.entity.Pedido;
 import com.proyecto.ms_pedidos.service.PedidoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,5 +29,10 @@ public class PedidoController {
     public ResponseEntity<Map<String, Object>> crear(@Valid @RequestBody PedidoRequest request) {
         Long id = service.crear(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("pedidoId", id));
+    }
+
+    @GetMapping
+    public List<Pedido> listar() {
+        return service.listar();
     }
 }

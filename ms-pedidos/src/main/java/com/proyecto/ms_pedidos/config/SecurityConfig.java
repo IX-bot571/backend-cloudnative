@@ -2,21 +2,21 @@ package com.proyecto.ms_pedidos.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-/** TEMPORAL: solo con el perfil "sinbd". Se reemplaza por la validacion JWT en la Fase 5. */
+/** Valida el JWT emitido por Keycloak en las peticiones /api/**. */
 @Configuration
-@Profile("sinbd")
-public class DevSecurityConfig {
+public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain devFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain jwtFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(a -> a.anyRequest().permitAll())
-            .httpBasic(Customizer.withDefaults());
+            .authorizeHttpRequests(a -> a
+                .requestMatchers("/actuator/health").permitAll()
+                .anyRequest().authenticated())
+            .oauth2ResourceServer(o -> o.jwt(Customizer.withDefaults()));
         return http.build();
     }
 }

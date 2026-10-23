@@ -9,6 +9,18 @@ spring:
     port: 5672
     username: guest
     password: guest
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/cloudnative
+  datasource:
+    url: jdbc:postgresql://ep-little-sky-b6nqrqkw-pooler.c-2.sa-east-1.aws.neon.tech/neondb?sslmode=require
+    username: neondb_owner
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
 
 app:
   rabbit:
