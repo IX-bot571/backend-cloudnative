@@ -22,3 +22,12 @@ app:
     dlx: tareas.dlx
     dlq: notificaciones.dlq
     dlq-routing-key: notificacion.fallida
+    tickets-queue: tickets.queue
+    tickets-routing-key: ticket.generar
+    tickets-dlq: tickets.dlq
+    tickets-dlq-routing-key: ticket.fallido
+    eventos-exchange: eventos.exchange
+    documentos-queue: documentos.queue
+    documentos-binding: documento.*
+    documentos-dlq: documentos.dlq
+    documentos-dlq-routing-key: documento.fallido
